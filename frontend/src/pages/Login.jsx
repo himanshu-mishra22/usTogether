@@ -5,9 +5,9 @@ import Image from "/Image.jpg"; // Ensure the path is correct
 const Login = () => {
 	return (
 		<div className="flex flex-col items-center justify-center px-6 py-8 mx-auto h-screen lg:py-0">
-			<div className="bg-white rounded-2xl shadow-md p-6 sm:p-8 w-full max-w-xl flex items-center border-2 border-blue-200">
+			<div className="bg-white rounded-2xl shadow-md p-6 sm:p-8 w-full max-w-xl flex flex-col sm:flex-row items-center border-2 border-blue-200">
 				{/* Image Section */}
-				<div className="hidden sm:block w-2/5">
+				<div className="w-60 sm:w-2/5">
 					<img
 						src={Image}
 						alt="Sign Up"

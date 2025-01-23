@@ -6,13 +6,15 @@ import Explore from "./pages/Explore";
 import Likes from "./pages/Likes";
 import Sidebar from "./components/Sidebar";
 
+
 function App() {
   return (
-    <div className="flex">
+    <div className="flex min-h-screen w-full bg-gray-900">
+      {/*bg-gray-900*/}
       <Sidebar />
-      <div className="max-w-5xl my-5 text-white mx-auto transition-all duration-300 flex-1">
+      <div className="my-5 pt-14 text-white mx-auto transition-all duration-300 flex-1">
         <Routes>
-          <Route path="/" element={<Homepage />} /> {/* Corrected from <route> to <Route> */}
+          <Route path="/" element={<Homepage />} /> 
           <Route path="/login" element={<Login />} />
           <Route path="/signup" element={<Signup />} />
           <Route path="/explore" element={<Explore />} />

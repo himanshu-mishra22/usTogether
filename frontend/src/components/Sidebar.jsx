@@ -1,31 +1,49 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import { IoHomeSharp } from "react-icons/io5";
 import { FaHeart } from "react-icons/fa";
 import { MdOutlineExplore } from "react-icons/md";
-import { PiSignInBold } from "react-icons/pi";
-import { MdEditDocument } from "react-icons/md";
 
-const Sidebar = () => {
-  const authuser = false;
+const Navbar = () => {
+  const [scrollPosition, setScrollPosition] = useState(0);
+  const authuser = false; // Change this to true to see the authenticated links
+
+  // Track scroll position
+  useEffect(() => {
+    const handleScroll = () => {
+      setScrollPosition(window.scrollY);
+    };
+
+    window.addEventListener("scroll", handleScroll);
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, []);
+
+  // Determine the navbar color based on scroll position
+  const navbarColor = scrollPosition > 30 ? "bg-gray-900" : "bg-[#0055ff]";
+
   return (
-    <aside className="flex flex-col items-center min-w-2 sm:w-16 sticky top-0 h-screen py-8 overflow-y-auto border-r backdrop-filter backdrop-blur-sm bg-opacity-10 border border-gray-100">
-      <nav className="h-full flex flex-col gap-3">
-        <Link to="/" className="flex justify-center">
-          <img className="h-8 " src="/github.svg" alt="Github Logo" />
-        </Link>
+    <nav
+      className={`flex items-center justify-between px-24 ${navbarColor} text-white p-2 w-full shadow-lg fixed top-0 left-0 z-50 transition-colors duration-300`}
+    >
+      <Link to="/" className="flex items-center">
+        <img className="h-8 pr-3" src="/github.svg" alt="Github Logo" />
+        <h8 className="text-orange-400 font-semibold flex items-center bg-transparent py-2 px-6 h-[44px] justify-center rounded-[50px] transition-transform transform hover:scale-110">
+          <span className="text-white pr-0.5">Us</span>Together
+        </h8>
+      </Link>
 
+      <div className="flex space-x-4">
         <Link
           to="/"
-          className="p-1.5 flex justify-center transition-colors duration-200 rounded -lg hover:bg-gray-800"
+          className="flex items-center p-2 transition-colors duration-200 rounded-lg"
         >
           <IoHomeSharp size={20} />
         </Link>
 
         {authuser && (
           <Link
-            to="/ikes"
-            className="p-1.5 flex justify-center transition-colors duration-200 rounded -lg hover:bg-gray-800"
+            to="/likes"
+            className="flex items-center p-2 transition-colors duration-200 rounded-lg"
           >
             <FaHeart size={22} />
           </Link>
@@ -34,7 +52,7 @@ const Sidebar = () => {
         {authuser && (
           <Link
             to="/explore"
-            className="p-1.5 flex justify-center transition-colors duration-200 rounded -lg hover:bg-gray-800"
+            className="flex items-center p-2 transition-colors duration-200 rounded-lg"
           >
             <MdOutlineExplore size={25} />
           </Link>
@@ -43,23 +61,27 @@ const Sidebar = () => {
         {!authuser && (
           <Link
             to="/login"
-            className="p-1.5 focus:outline-nones transition-colors duration-200 rounded -lg hover:bg-gray-800"
+            className="flex items-center p-2 transition-colors duration-200 rounded-lg"
           >
-            <PiSignInBold size={25} />
+            <button className="bg-transparent text-white font-[600] py-2 px-6 h-[44px] flex items-center justify-center rounded-[50px] transition-transform transform hover:scale-110">
+              Sign in
+            </button>
           </Link>
         )}
 
         {!authuser && (
           <Link
             to="/signup"
-            className="p-1.5 focus:outline-nones transition-colors  duration-200 rounded-lg hover:bg-gray-800"
+            className="flex items-center p-2 transition-colors duration-200 rounded-lg"
           >
-            <MdEditDocument size={25} />
+            <button className="bg-transparent border border-white py-2 px-6 text-white font-[600] h-[44px] flex items-center justify-center rounded-[50px] hover:bg-[#A433EC] hover:border-transparent transition duration-300">
+              Signup
+            </button>
           </Link>
         )}
-      </nav>
-    </aside>
+      </div>
+    </nav>
   );
 };
 
-export default Sidebar;
+export default Navbar;
