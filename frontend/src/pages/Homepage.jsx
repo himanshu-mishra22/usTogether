@@ -1,6 +1,7 @@
 // src/components/HomePage.jsx
 import React from "react";
 import image from "/Purple.png";
+import { Link } from "react-router-dom";
 
 const HomePage = () => {
   return (
@@ -16,6 +17,8 @@ const HomePage = () => {
             Unite your development and deployment on one collaborative platform.
             Accelerate software delivery with seamless teamwork.
           </p>
+
+
           <div className="flex flex-col md:flex-row space-y-4 md:space-y-0 md:space-x-4 justify-center lg:justify-start">
             <button className="bg-transparent border border-white text-white py-2 px-8 font-[600] h-[44px] flex items-center justify-center rounded-[50px] hover:bg-[#FFFF] hover:text-gray-900 hover:border-transparent transition duration-300">
               Sign In
@@ -37,15 +40,15 @@ const HomePage = () => {
       </main>
 
       {/* Footer Section */}
-      <footer className="bg-teal-200 py-10">
+      <footer className="bg-gradient-to-b py-10">
         <div className="grid grid-cols-3 gap-4 justify-center max-w-md mx-auto">
-          <button className="bg-white px-6 py-2 rounded-md shadow text-teal-600">
+          <button className="bg-white px-6 py-2 rounded-full shadow-lg shadow-gray-400 text-blue-500 hover:bg-gray-100 transition duration-300">
             Code
           </button>
-          <button className="bg-white px-6 py-2 rounded-md shadow text-teal-600">
+          <button className="bg-orange-500 px-6 py-2 rounded-full shadow-lg shadow-gray-400 text-white hover:bg-purple-400 transition duration-300">
             Plan
           </button>
-          <button className="bg-purple-500 px-6 py-2 rounded-md shadow text-white">
+          <button className="bg-white px-6 py-2 rounded-full shadow-lg shadow-gray-400 text-blue-500 hover:bg-gray-100 transition duration-300">
             Collaborate
           </button>
         </div>
