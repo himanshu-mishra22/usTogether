@@ -7,5 +7,6 @@
       @apply bg-gradient-to-b from-custom-green to-custom-white;
       min-height: 100vh; /* Ensure the body takes at least the full height of the viewport */
     }
+
     
 }
