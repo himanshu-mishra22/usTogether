@@ -1,12 +1,9 @@
 import { FaCodeBranch, FaCopy, FaRegStar } from "react-icons/fa";
 import { FaCodeFork } from "react-icons/fa6";
-import { formatDate } from "../utils/functions";
 import { PROGRAMMING_LANGUAGES } from "../utils/constants";
 import toast from "react-hot-toast";
 
 const Repo = ({ repo }) => {
-	// const formattedDate = formatDate(repo.created_at);
-
 	const handleCloneClick = async () => {
 		try {
 			await navigator.clipboard.writeText(repo.clone_url);
@@ -17,18 +14,20 @@ const Repo = ({ repo }) => {
 	};
 
 	return (
-		<div className="border border-orange-200 rounded-xl p-4 shadow-sm bg-white max-w-md w-full">
+		<div className="border border-orange-200 rounded-xl p-4 shadow-md bg-white transition-transform hover:scale-[1.02]">
 			<div className="flex justify-between items-center mb-2">
-				<h3 className="text-lg font-semibold text-gray-800 flex items-center gap-2">
+				<h3 className="text-md font-semibold text-gray-800 flex items-center gap-2">
 					<FaCodeBranch className="text-blue-500" />
-					<a href={repo.html_url} target="_blank" rel="noreferrer">{repo.name}</a>
+					<a href={repo.html_url} target="_blank" rel="noreferrer" className="hover:underline">
+						{repo.name}
+					</a>
 				</h3>
 				<span className="bg-gray-100 text-gray-800 text-xs px-2 py-0.5 rounded-full">
 					Public
 				</span>
 			</div>
 
-			<p className="text-sm text-gray-600 mb-3">
+			<p className="text-sm text-gray-600 mb-3 line-clamp-3">
 				{repo.description ? repo.description.slice(0, 250) : "No description provided"}
 			</p>
 
@@ -47,14 +46,14 @@ const Repo = ({ repo }) => {
 				</span>
 			</div>
 
-			<div className="flex flex-wrap gap-2 mt-2">
-				{repo.language && PROGRAMMING_LANGUAGES[repo.language] && (
-					<span className="flex items-center gap-1 bg-gray-100 px-2 py-1 rounded-full text-xs">
+			{repo.language && PROGRAMMING_LANGUAGES[repo.language] && (
+				<div className="flex items-center gap-2 text-xs">
+					<span className="flex items-center gap-1 bg-gray-100 px-2 py-1 rounded-full">
 						<img src={PROGRAMMING_LANGUAGES[repo.language]} alt={repo.language} className="h-4 w-4" />
 						{repo.language}
 					</span>
-				)}
-			</div>
+				</div>
+			)}
 		</div>
 	);
 };
