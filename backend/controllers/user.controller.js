@@ -9,13 +9,24 @@ export const getUserProfileAndRepos = async (req, res) => {
 			},
 		});
 
+		if (!userRes.ok) {
+			return res.status(userRes.status).json({ error: `GitHub API error: ${userRes.statusText}` });
+		}
+
 		const userProfile = await userRes.json();
+
+		
 
 		const repoRes = await fetch(userProfile.repos_url, {
 			headers: {
 				authorization: `token ${process.env.GITHUB_API_KEY}`,
 			},
 		});
+
+		if (!repoRes.ok) {
+			return res.status(repoRes.status).json({ error: `GitHub Repo API error: ${repoRes.statusText}` });
+		}
+
 		const repos = await repoRes.json();
 
 		res.status(200).json({ userProfile, repos });
@@ -23,6 +34,15 @@ export const getUserProfileAndRepos = async (req, res) => {
 		res.status(500).json({ error: error.message });
 	}
 };
+
+export const getme = async(req,res)=>{
+	if (req.session && req.session.user) {
+		res.json({ username: req.session.user.login });
+	  } else {
+		res.status(401).json({ error: 'Not authenticated' });
+	  }
+}
+
 
 export const likeProfile = async (req, res) => {
 	try {

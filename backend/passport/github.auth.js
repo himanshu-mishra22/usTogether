@@ -5,13 +5,6 @@ import User from "../models/user.model.js";
 
 dotenv.config();
 
-passport.serializeUser(function (user, done) {
-	done(null, user);
-});
-
-passport.deserializeUser(function (obj, done) {
-	done(null, obj);
-});
 passport.use(
 	new GitHubStrategy(
 		{
@@ -39,3 +32,10 @@ passport.use(
 		}
 	)
 );
+passport.serializeUser(function (user, done) {
+	done(null, user);
+});
+
+passport.deserializeUser(function (obj, done) {
+	done(null, obj);
+});

@@ -4,9 +4,7 @@ import cors from "cors";
 import passport from "passport";
 import session from "express-session";
 import path from "path";
-
 import "./passport/github.auth.js";
-
 import userRoutes from "./routes/user.route.js";
 import exploreRoutes from "./routes/explore.route.js";
 import authRoutes from "./routes/auth.route.js";
@@ -20,12 +18,10 @@ const PORT = process.env.PORT || 5000;
 const __dirname = path.resolve();
 
 app.use(session({ secret: "keyboard cat", resave: false, saveUninitialized: false }));
-// Initialize Passport!  Also use passport.session() middleware, to support
-// persistent login sessions (recommended).
 app.use(passport.initialize());
 app.use(passport.session());
 app.use(cors({
-	origin: 'http://localhost:5173', // your frontend URL
+	origin: 'http://localhost:5173', 
 	credentials: true
   }));
 
@@ -38,6 +34,11 @@ app.use(express.static(path.join(__dirname, "/frontend/dist")));
 app.get("*", (req, res) => {
 	res.sendFile(path.join(__dirname, "frontend", "dist", "index.html"));
 });
+
+// console.log(process.env.GITHUB_CLIENT_SECRET);
+// console.log(process.env.GITHUB_CLIENT_ID);
+// console.log(process.env.GITHUB_API_KEY);
+
 
 app.listen(PORT, () => {
 	console.log(`Server started on http://localhost:${PORT}`);
